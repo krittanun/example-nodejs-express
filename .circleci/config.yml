@@ -28,7 +28,7 @@ jobs:
               docker build -t krittanun/example-nodejs-circle-production:${CIRCLE_SHA1} .
               docker push krittanun/example-nodejs-circle-production:lastest
               docker push krittanun/example-nodejs-circle-production:${CIRCLE_SHA1}
-            elif ["${CIRCLE_BRANCH{" == "staging"]; then
+            elif ["${CIRCLE_BRANCH}" == "staging"]; then
               cp Dockerfile.staging Dockerfile
               docker build -t krittanun/example-nodejs-circle-staging:lastest .
               docker push krittanun/example-nodejs-circle-staging:lastest

@@ -17,6 +17,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - setup_remote_docker
+      - run: npm test
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
           name: "Build docker image and push o docker hub"

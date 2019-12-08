@@ -60,10 +60,10 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               cp Dockerfile.production Dockerfile
-              docker build -t krittanun/example-nodejs-circle:latest .
-              docker build -t krittanun/example-nodejs-circle:${CIRCLE_SHA1} .
-              docker push krittanun/example-nodejs-circle:latest
-              docker push krittanun/example-nodejs-circle:${CIRCLE_SHA1}
+              docker build -t krittanun/example-nodejs-circle-production:latest .
+              docker build -t krittanun/example-nodejs-circle-production:${CIRCLE_SHA1} .
+              docker push krittanun/example-nodejs-circle-production:latest
+              docker push krittanun/example-nodejs-circle-production:${CIRCLE_SHA1}
             elif [ "${CIRCLE_BRANCH}" == "staging" ]; then
               cp Dockerfile.staging Dockerfile
               docker build -t krittanun/example-nodejs-circle-staging:latest .
@@ -86,7 +86,7 @@ jobs:
                 -e CATTLE_SECRET_KEY="$CATTLE_SECRET_KEY" \
                 -e CATTLE_URL="$CATTLE_URL" \
                 etlweather/gaucho upgrade $RANCHER_EXAMPLE_NODEJS \
-                --imageUuid 'docker:krittanun/example-nodejs-circle:latest' \
+                --imageUuid 'docker:krittanun/example-nodejs-circle-production:latest' \
                 --batch_size 3 --start_first \
                 --auto_complete --timeout 600 \
                 /

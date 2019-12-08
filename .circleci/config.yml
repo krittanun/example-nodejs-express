@@ -36,8 +36,20 @@ jobs:
               echo "This is ${CIRCLE_BRANCH}"
             fi
       - run:
-         name: "Call to rancher to deploy"
+         name: "Call to rancher to deploy 1"
          command: |
+          docker run --rm -it \
+          -e CATTLE_ACCESS_KEY="$CATTLE_ACCESS_KEY" \
+          -e CATTLE_SECRET_KEY="$CATTLE_SECRET_KEY" \
+          -e CATTLE_URL="$CATTLE_URL" \
+          etlweather/gaucho upgrade $RANCHER_EXAMPLE_NODEJS \
+          --imageUuid 'docker:krittanun/example-nodejs-circle-production:latest' \
+          --batch_size 5 --start_first \
+          --auto_complete --timeout 600 \
+          /
+      - run:
+        name: "Call to rancher to deploy 2"
+        command: |
           docker run --rm -it \
           -e CATTLE_ACCESS_KEY="$CATTLE_ACCESS_KEY" \
           -e CATTLE_SECRET_KEY="$CATTLE_SECRET_KEY" \

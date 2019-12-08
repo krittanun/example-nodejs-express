@@ -46,7 +46,6 @@ jobs:
           --imageUuid 'docker:krittanun/example-nodejs-circle-production:latest' \
           --batch_size 3 --start_first \
           --auto_complete --timeout 600 \
-          --scale 3 \
           /      
       - run: echo Done
       - run: echo Hey
